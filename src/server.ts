@@ -30,4 +30,6 @@ app.use("/", siteRoutes);
 // }
 // const serverPort = process.env.PORT ? parseInt(process.env.PORT) : 9000;
 // runServer(serverPort, regularServer);
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, () => {
+    console.log("🚀 Running at PORT", process.env.PORT);
+});
