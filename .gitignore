@@ -126,3 +126,4 @@ dist
 
 #Nodemon
 nodemon.json
+.vercel
