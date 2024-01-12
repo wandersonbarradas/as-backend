@@ -7,7 +7,7 @@
         "dev": "nodemon",
         "build": "tsc",
         "start": "node ./build/server.js",
-        "prebuild": "prisma migrate deploy"
+        "vercel-build": "npx prisma migrate deploy"
     },
     "author": "",
     "license": "ISC",
