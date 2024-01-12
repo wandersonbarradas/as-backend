@@ -1,4 +1,3 @@
-import { doMatches } from "./../services/events";
 import { RequestHandler } from "express";
 import * as events from "../services/events";
 import * as people from "../services/people";
