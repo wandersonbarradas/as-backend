@@ -21,12 +21,7 @@ export const getOne = async (id: number) => {
     }
 };
 
-// type EventsCreateData = Prisma.Args<typeof prisma.event, "create">["data"];
-type EventsCreateData = {
-    title: string;
-    description: string;
-};
-
+type EventsCreateData = Prisma.Args<typeof prisma.event, "create">["data"];
 export const add = async (data: EventsCreateData) => {
     try {
         return await prisma.event.create({ data });
@@ -35,14 +30,7 @@ export const add = async (data: EventsCreateData) => {
     }
 };
 
-type EventsUpdateData = {
-    status?: boolean;
-    title?: string;
-    description?: string;
-    grouped?: boolean;
-};
-
-//type EventsUpdateData = Prisma.Args<typeof prisma.event, "update">["data"];
+type EventsUpdateData = Prisma.Args<typeof prisma.event, "update">["data"];
 export const update = async (id: number, data: EventsUpdateData) => {
     try {
         return await prisma.event.update({ where: { id }, data });
