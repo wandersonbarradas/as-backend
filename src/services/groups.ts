@@ -1,5 +1,6 @@
 import { PrismaClient, Prisma } from "@prisma/client";
 import * as events from "./events";
+import * as people from "./people";
 const prisma = new PrismaClient();
 
 export const getAll = async (id_event: number) => {
@@ -44,10 +45,28 @@ export const update = async (
     }
 };
 
-export const remove = async (filters: UpdateFilters) => {
+type DeleteFilters = {
+    id: number;
+    id_event: number;
+};
+
+export const remove = async (filters: DeleteFilters) => {
     try {
+        const groupPeople = await people.getAll({
+            id_event: filters.id_event,
+            id_group: filters.id,
+        });
+        if (!groupPeople) return false;
+        for (let i in groupPeople) {
+            await people.remove({
+                id_event: filters.id_event,
+                id_group: filters.id,
+                id: groupPeople[i].id,
+            });
+        }
         return await prisma.eventGroup.delete({ where: filters });
     } catch (error) {
+        console.log("🚀 ~ remove ~ error:", error);
         return false;
     }
 };

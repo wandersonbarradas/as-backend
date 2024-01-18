@@ -64,6 +64,7 @@ export const remove = async (filters: DeleteFilters) => {
     try {
         return await prisma.eventPeople.delete({ where: filters });
     } catch (error) {
+        console.log("🚀 ~ remove ~ error:", error);
         return false;
     }
 };

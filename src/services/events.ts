@@ -41,8 +41,14 @@ export const update = async (id: number, data: EventsUpdateData) => {
 
 export const remove = async (id: number) => {
     try {
+        const eventGroups = await groups.getAll(id);
+        if (!eventGroups) return false;
+        for (let i in eventGroups) {
+            await groups.remove({ id_event: id, id: eventGroups[i].id });
+        }
         return await prisma.event.delete({ where: { id } });
     } catch (error) {
+        console.log("🚀 ~ remove ~ error:", error);
         return false;
     }
 };
